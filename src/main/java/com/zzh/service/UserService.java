@@ -10,5 +10,5 @@ import com.zzh.po.User;
 
 public interface UserService {
 
-    User selectByPrimaryKey();
+    User selectByPrimaryKey(int id);
 }

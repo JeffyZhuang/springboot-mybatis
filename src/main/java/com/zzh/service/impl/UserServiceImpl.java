@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService{
     private UserMapper userMapper;
 
     @Override
-    public User selectByPrimaryKey() {
-        return userMapper.selectByPrimaryKey(1);
+    public User selectByPrimaryKey(int id) {
+        return userMapper.selectByPrimaryKey(id);
     }
 }
