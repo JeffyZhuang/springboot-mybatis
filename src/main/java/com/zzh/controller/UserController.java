@@ -1,6 +1,7 @@
 package com.zzh.controller;
 
 import com.zzh.po.User;
+import com.zzh.result.ApiResult;
 import com.zzh.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +24,8 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public User getUserList(@RequestParam(value = "id") int id) {
-        return userService.selectByPrimaryKey(id);
+    public ApiResult getUserList(@RequestParam(value = "id") int id) {
+        return ApiResult.success(userService.selectByPrimaryKey(id));
 
-    }
-
-    @RequestMapping(value = "/hizzh", method = RequestMethod.GET)
-    public String sayHi() {
-        return "你最俗";
     }
 }

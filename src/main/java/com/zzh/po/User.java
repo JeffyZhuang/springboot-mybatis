@@ -1,6 +1,10 @@
 package com.zzh.po;
-
 import lombok.Data;
+
+/**
+ * @author zzh
+ * @date 2018-9-29
+ */
 
 @Data
 public class User {

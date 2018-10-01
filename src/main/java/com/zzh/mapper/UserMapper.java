@@ -2,6 +2,10 @@ package com.zzh.mapper;
 
 import com.zzh.po.User;
 
+/**
+ * @author zzh
+ * @date 2018-9-29
+ */
 public interface UserMapper {
     int deleteByPrimaryKey(Integer userId);
 
