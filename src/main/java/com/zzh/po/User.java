@@ -1,6 +1,9 @@
 package com.zzh.po;
+
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * @author zzh
@@ -8,7 +11,9 @@ import lombok.Data;
  */
 
 @Data
-public class User {
+public class User implements Serializable {
+    private static final long serialVersionUID = -7731026583659819909L;
+
     @ApiModelProperty(value = "用户的id")
     private Integer userId;
     @ApiModelProperty(value = "用户的名字")

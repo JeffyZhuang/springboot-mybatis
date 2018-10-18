@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,7 +26,6 @@ public class UserController {
     @ApiOperation(value="获取用户", notes="根据userId获取用户")
     @ApiImplicitParam(name = "id", value = "ID", required = true, dataType = "Long",paramType = "query")
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-    @Cacheable("user")
     public ApiResult getUserList(@RequestParam(value = "id") int id) {
         return ApiResult.success(userService.selectByPrimaryKey(id));
 
