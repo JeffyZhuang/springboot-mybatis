@@ -6,15 +6,19 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.OutputStream;
 import java.util.List;
 
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.xssf.usermodel.XSSFCellStyle;
-import org.apache.poi.xssf.usermodel.XSSFColor;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.poi.xssf.usermodel.extensions.XSSFCellBorder.BorderSide;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 
-import java.awt.Color;
 import java.net.URLEncoder;
 
 /**
@@ -33,48 +37,48 @@ public class ExportExcelUtils {
 
     public static void exportExcel(ExcelData data, OutputStream out) throws Exception {
 
-        XSSFWorkbook wb = new XSSFWorkbook();
+        HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
         try {
             String sheetName = data.getName();
             if (null == sheetName) {
                 sheetName = "Sheet1";
             }
-            XSSFSheet sheet = wb.createSheet(sheetName);
-            writeExcel(wb, sheet, data);
+            HSSFSheet sheet = hssfWorkbook.createSheet(sheetName);
+            writeExcel(hssfWorkbook, sheet, data);
 
-            wb.write(out);
+            hssfWorkbook.write(out);
         } finally {
-            wb.close();
+            hssfWorkbook.close();
         }
     }
 
-    private static void writeExcel(XSSFWorkbook wb, Sheet sheet, ExcelData data) {
+    private static void writeExcel(HSSFWorkbook hssfWorkbook, Sheet sheet, ExcelData data) {
 
         int rowIndex = 0;
 
-        rowIndex = writeTitlesToExcel(wb, sheet, data.getTitles());
-        writeRowsToExcel(wb, sheet, data.getRows(), rowIndex);
+        rowIndex = writeTitlesToExcel(hssfWorkbook, sheet, data.getTitles());
+        writeRowsToExcel(hssfWorkbook, sheet, data.getRows(), rowIndex);
         autoSizeColumns(sheet, data.getTitles().size() + 1);
 
     }
 
-    private static int writeTitlesToExcel(XSSFWorkbook wb, Sheet sheet, List<String> titles) {
+    private static int writeTitlesToExcel(HSSFWorkbook hssfWorkbook, Sheet sheet, List<String> titles) {
         int rowIndex = 0;
         int colIndex = 0;
 
-        Font titleFont = wb.createFont();
+        Font titleFont = hssfWorkbook.createFont();
         titleFont.setFontName("simsun");
         titleFont.setBold(true);
         // titleFont.setFontHeightInPoints((short) 14);
         titleFont.setColor(IndexedColors.BLACK.index);
 
-        XSSFCellStyle titleStyle = wb.createCellStyle();
+        HSSFCellStyle titleStyle = hssfWorkbook.createCellStyle();
         titleStyle.setAlignment(HorizontalAlignment.CENTER);
         titleStyle.setVerticalAlignment(VerticalAlignment.CENTER);
-        titleStyle.setFillForegroundColor(new XSSFColor(new Color(182, 184, 192)));
+        titleStyle.setFillForegroundColor(IndexedColors.AQUA.index);
         titleStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
         titleStyle.setFont(titleFont);
-        setBorder(titleStyle, BorderStyle.THIN, new XSSFColor(new Color(0, 0, 0)));
+        setBorder(titleStyle, BorderStyle.THIN, IndexedColors.BLACK.index);
 
         Row titleRow = sheet.createRow(rowIndex);
         // titleRow.setHeightInPoints(25);
@@ -91,19 +95,19 @@ public class ExportExcelUtils {
         return rowIndex;
     }
 
-    private static int writeRowsToExcel(XSSFWorkbook wb, Sheet sheet, List<List<Object>> rows, int rowIndex) {
+    private static int writeRowsToExcel(HSSFWorkbook hssfWorkbook, Sheet sheet, List<List<Object>> rows, int rowIndex) {
         int colIndex = 0;
 
-        Font dataFont = wb.createFont();
+        Font dataFont = hssfWorkbook.createFont();
         dataFont.setFontName("simsun");
         // dataFont.setFontHeightInPoints((short) 14);
         dataFont.setColor(IndexedColors.BLACK.index);
 
-        XSSFCellStyle dataStyle = wb.createCellStyle();
+        HSSFCellStyle dataStyle = hssfWorkbook.createCellStyle();
         dataStyle.setAlignment(HorizontalAlignment.CENTER);
         dataStyle.setVerticalAlignment(VerticalAlignment.CENTER);
         dataStyle.setFont(dataFont);
-        setBorder(dataStyle, BorderStyle.THIN, new XSSFColor(new Color(0, 0, 0)));
+        setBorder(dataStyle, BorderStyle.THIN, IndexedColors.BLACK.index);
 
         for (List<Object> rowData : rows) {
             Row dataRow = sheet.createRow(rowIndex);
@@ -140,14 +144,15 @@ public class ExportExcelUtils {
         }
     }
 
-    private static void setBorder(XSSFCellStyle style, BorderStyle border, XSSFColor color) {
+    private static void setBorder(HSSFCellStyle style, BorderStyle border, short color) {
         style.setBorderTop(border);
         style.setBorderLeft(border);
         style.setBorderRight(border);
         style.setBorderBottom(border);
-        style.setBorderColor(BorderSide.TOP, color);
-        style.setBorderColor(BorderSide.LEFT, color);
-        style.setBorderColor(BorderSide.RIGHT, color);
-        style.setBorderColor(BorderSide.BOTTOM, color);
+        style.setTopBorderColor(color);
+        style.setBottomBorderColor(color);
+        style.setLeftBorderColor(color);
+        style.setRightBorderColor(color);
+
     }
 }
