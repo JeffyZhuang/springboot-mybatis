@@ -2,7 +2,7 @@
 
 1、springBoot + Mybatis 搭建基础模块
 
-2、springBoot整合logBack
+2、springBoot整合logBack增加日志输出
 
 3、springBoot整合Swagger
 
