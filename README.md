@@ -1,11 +1,14 @@
 # springboot-mybatis
 
-1、springBoot + Mybatis 搭建基础模块
+1、2018-08-24:springBoot + Mybatis 搭建基础模块
 
-2、springBoot整合logBack增加日志输出
+2、2018-09-28:springBoot整合logBack增加日志输出
 
-3、springBoot整合Swagger
+3、2018-10-01:springBoot整合Swagger
 
-4、返回设置返回结构增加状态码
+4、2018-10-01:返回设置返回结构增加状态码
 
-5、springBoot整合POI
+5、2018-11-07:springBoot整合POI
+
+6、2018-12-08 : SpringBoot整合Shiro，增加自定义异常类，增加脚本文件init.sql 
+                参考：https://github.com/Smith-Cruise/Spring-Boot-Shiro
