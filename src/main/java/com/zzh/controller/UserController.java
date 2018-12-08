@@ -1,6 +1,7 @@
 package com.zzh.controller;
 
 import com.zzh.ErrorCode;
+import com.zzh.exception.GlobalException;
 import com.zzh.exception.UnauthorizedException;
 import com.zzh.po.User;
 import com.zzh.result.ApiResult;
@@ -29,6 +30,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 根据ID获取用户信息
+     *
+     * @param id
+     * @return
+     */
     @ApiOperation(value = "获取用户", notes = "根据userId获取用户")
     @ApiImplicitParam(name = "id", value = "ID", required = true, dataType = "Long", paramType = "query")
     @RequestMapping(value = "/user", method = RequestMethod.GET)
@@ -37,7 +44,12 @@ public class UserController {
 
     }
 
-
+    /**
+     * 登陆接口
+     *
+     * @param userVO
+     * @return
+     */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ApiResult getUserList(@RequestBody UserVO userVO) {
         String userName = userVO.getUserName();
@@ -49,8 +61,8 @@ public class UserController {
         if (user.getPassword().equals(password)) {
             return new ApiResult(ErrorCode.SUCCESS.getCode(), "Login SUCCESS", JWTUtil.sign(userName, password));
         } else {
+            //把异常抛到自定义的异常类
             throw new UnauthorizedException();
         }
-
     }
 }

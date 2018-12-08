@@ -1,18 +1,21 @@
 package com.zzh.exception;
 
+import lombok.Data;
+
 /**
  * @Author: zzh
- * @Description: 自定义无权限处理类
+ * @Description:
  * @Date: 2018/12/8
  */
-public class UnauthorizedException extends RuntimeException {
+@Data
+public class UnauthorizedException extends GlobalException {
 
-    public UnauthorizedException(String msg) {
-        super(msg);
+    public UnauthorizedException(int code, String msg) {
+        super(code, msg);
     }
 
     public UnauthorizedException() {
-
     }
+
 
 }
