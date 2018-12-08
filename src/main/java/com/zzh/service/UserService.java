@@ -11,4 +11,12 @@ import com.zzh.po.User;
 public interface UserService {
 
     User selectByPrimaryKey(int id);
+
+    /**
+     * 根据用户名查用户信息
+     *
+     * @param userName
+     * @return
+     */
+    User selectByUserName(String userName);
 }

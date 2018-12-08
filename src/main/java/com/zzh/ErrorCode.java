@@ -11,7 +11,7 @@ import lombok.Getter;
 public enum ErrorCode {
 
     //异常代码 100以内
-    SUCCESS(0, "成功"), FAIL(-1, "失败");
+    SUCCESS(0, "成功"), FAIL(-1, "失败"),USER_NO_EXIT(9001, "用户不存在");
 
 
     private int code;
