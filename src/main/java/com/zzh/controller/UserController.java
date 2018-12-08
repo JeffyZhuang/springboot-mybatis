@@ -1,10 +1,13 @@
 package com.zzh.controller;
 
 import com.zzh.ErrorCode;
+import com.zzh.dto.UserRoleModuleDTO;
 import com.zzh.exception.GlobalException;
 import com.zzh.exception.UnauthorizedException;
 import com.zzh.po.User;
 import com.zzh.result.ApiResult;
+import com.zzh.service.UserRoleModuleService;
+import com.zzh.service.UserRoleService;
 import com.zzh.service.UserService;
 import com.zzh.shiro.JWTUtil;
 import com.zzh.vo.UserVO;
@@ -30,6 +33,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserRoleModuleService userRoleModuleService;
+
     /**
      * 根据ID获取用户信息
      *
@@ -43,6 +49,19 @@ public class UserController {
         return ApiResult.success(userService.selectByPrimaryKey(id));
 
     }
+
+    /**
+     * 根据用户id获取用户的角色资源
+     *
+     * @param uid
+     * @return
+     */
+    @RequestMapping(value = "/userRoleModule", method = RequestMethod.GET)
+    public ApiResult userRoleModule(@RequestParam(value = "uid") int uid) {
+        UserRoleModuleDTO userRoleModuleDTO = userRoleModuleService.selectRolesModulesByUid(uid);
+        return ApiResult.success(userRoleModuleDTO);
+    }
+
 
     /**
      * 登陆接口

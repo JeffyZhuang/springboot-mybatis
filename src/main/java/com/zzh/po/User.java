@@ -15,11 +15,9 @@ public class User implements Serializable {
     private static final long serialVersionUID = -7731026583659819909L;
 
     @ApiModelProperty(value = "用户的id")
-    private Integer userId;
+    private Integer uid;
     @ApiModelProperty(value = "用户的名字")
-    private String userName;
+    private String username;
     @ApiModelProperty(value = "用户的密码")
     private String password;
-    @ApiModelProperty(value = "用户的电话")
-    private String phone;
 }
