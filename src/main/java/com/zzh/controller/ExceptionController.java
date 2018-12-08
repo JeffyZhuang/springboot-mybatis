@@ -23,7 +23,7 @@ public class ExceptionController {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(ShiroException.class)
     public ApiResult handle401(ShiroException e) {
-        return new ApiResult(HttpStatus.UNAUTHORIZED.value(), "Shiro权限认证失败", null);
+        return new ApiResult(HttpStatus.UNAUTHORIZED.value(), "无权限访问", null);
     }
 
     //捕捉UnauthorizedException
