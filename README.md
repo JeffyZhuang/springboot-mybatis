@@ -12,3 +12,6 @@
 
 6、2018-12-08 : SpringBoot整合Shiro，增加自定义异常类，增加脚本文件init.sql 
                 参考：https://github.com/Smith-Cruise/Spring-Boot-Shiro
+                
+7、2018-12-10 : SpringBoot 整合redis 
+                参考：https://www.jianshu.com/p/e94fe01cd032
