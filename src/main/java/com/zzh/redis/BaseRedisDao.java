@@ -153,8 +153,18 @@ public interface BaseRedisDao<K, V> {
      */
     boolean exists(final K key);
 
+    /**
+     * 读取int缓存
+     * @param key
+     * @return
+     */
     Object get(int key);
 
+    /**
+     * 读取long缓存
+     * @param key
+     * @return
+     */
     Object get(long key);
 
     /**
@@ -162,7 +172,7 @@ public interface BaseRedisDao<K, V> {
      * @param key
      * @return
      */
-    V get(final K key);
+    V get( K key);
     /**
      * 读取String缓存 可以是对象
      * @param key
@@ -176,6 +186,11 @@ public interface BaseRedisDao<K, V> {
      */
     List<Object> getByRegular(final K regKey);
 
+    /**
+     * 写入缓存 可以是对象
+     * @param key
+     * @param value
+     */
     void set(long key, Object value);
 
     /**

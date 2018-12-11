@@ -1,8 +1,6 @@
-package com.zzh.config;
+package com.zzh.redis;
 
 import com.alibaba.fastjson.parser.ParserConfig;
-import com.zzh.redis.FastJson2JsonRedisSerializer;
-import com.zzh.redis.RedisConfigProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +15,7 @@ import redis.clients.jedis.JedisPoolConfig;
 /**
  * redis配置类
  *
- * @author zcc ON 2018/3/19
+ * @author zzh ON 2018/12/10
  **/
 @Configuration
 public class RedisConfig {

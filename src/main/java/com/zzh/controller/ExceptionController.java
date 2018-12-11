@@ -1,6 +1,5 @@
 package com.zzh.controller;
 
-import com.zzh.exception.GlobalException;
 import com.zzh.exception.UnauthorizedException;
 import com.zzh.result.ApiResult;
 import org.apache.shiro.ShiroException;
