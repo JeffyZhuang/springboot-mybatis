@@ -1,5 +1,6 @@
 package com.zzh.service.impl;
 
+import com.zzh.RedisKeyPrefix;
 import com.zzh.mapper.UserMapper;
 import com.zzh.po.User;
 import com.zzh.redis.RedisHandle;
@@ -26,11 +27,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User selectByPrimaryKey(int id) {
-        User user = (User) redisHandle.get(id);
+        User user = (User) redisHandle.get(RedisKeyPrefix.USER + id);
         if (user == null) {
             log.info("-------------调数据库-------------");
             user = userMapper.selectByPrimaryKey(id);
-            redisHandle.set(id, user);
+            redisHandle.set(RedisKeyPrefix.USER + id, user);
         }
         return user;
     }
