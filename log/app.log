@@ -16,3 +16,30 @@
 2018-12-17 14:46:22,151 INFO (TaskScheduler.java:39)- 定时任务调度成功： QuarzTaskDTO(id=1, taskName=测试定时任务, taskGroup=null, taskClass=com.zzh.quarz.jobs.SyncUserInfo, cron=0 0/1 * * * ? , description=测试测试, status=1)
 2018-12-17 14:46:22,151 INFO (QuarzTaskStarter.java:34)- ------------启动所有定时任务-----------
 2018-12-17 14:46:22,198 INFO (StartupInfoLogger.java:59)- Started SpringbootApplication in 9.406 seconds (JVM running for 10.35)
+2018-12-17 16:26:55,274 INFO (StartupInfoLogger.java:50)- Starting SpringbootApplication on DESKTOP-LLVV77L with PID 14868 (C:\Users\zzh\IdeaProjects\springboot\target\classes started by zzh in C:\Users\zzh\IdeaProjects\springboot)
+2018-12-17 16:26:55,283 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.0.5.RELEASE, Spring v5.0.9.RELEASE
+2018-12-17 16:26:55,285 INFO (SpringApplication.java:680)- No active profile set, falling back to default profiles: default
+2018-12-17 16:27:03,362 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: select id, task_name, task_group, task_class, cron, description, status from job_entity where status = 1 
+2018-12-17 16:27:03,378 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 
+2018-12-17 16:27:03,391 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 1
+2018-12-17 16:27:03,402 INFO (TaskScheduler.java:39)- 定时任务调度成功： QuarzTaskDTO(id=1, taskName=测试定时任务, taskGroup=null, taskClass=com.zzh.quarz.jobs.SyncUserInfo, cron=0 0/1 * * * ? , description=测试测试, status=1)
+2018-12-17 16:27:03,402 INFO (QuarzTaskStarter.java:34)- ------------启动所有定时任务-----------
+2018-12-17 16:27:03,441 INFO (StartupInfoLogger.java:59)- Started SpringbootApplication in 9.296 seconds (JVM running for 10.27)
+2018-12-17 16:31:24,136 INFO (StartupInfoLogger.java:50)- Starting SpringbootApplication on DESKTOP-LLVV77L with PID 7864 (C:\Users\zzh\IdeaProjects\springboot\target\classes started by zzh in C:\Users\zzh\IdeaProjects\springboot)
+2018-12-17 16:31:24,146 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.0.5.RELEASE, Spring v5.0.9.RELEASE
+2018-12-17 16:31:24,148 INFO (SpringApplication.java:680)- No active profile set, falling back to default profiles: default
+2018-12-17 16:31:32,934 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: select id, task_name, task_group, task_class, cron, description, status from job_entity where status = 1 
+2018-12-17 16:31:32,953 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 
+2018-12-17 16:31:32,966 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 1
+2018-12-17 16:31:32,978 INFO (TaskScheduler.java:39)- 定时任务调度成功： QuarzTaskDTO(id=1, taskName=测试定时任务, taskGroup=null, taskClass=com.zzh.quarz.jobs.SyncUserInfo, cron=0 0/1 * * * ? , description=测试测试, status=1)
+2018-12-17 16:31:32,978 INFO (QuarzTaskStarter.java:34)- ------------启动所有定时任务-----------
+2018-12-17 16:31:33,022 INFO (StartupInfoLogger.java:59)- Started SpringbootApplication in 9.879 seconds (JVM running for 10.769)
+2018-12-17 16:32:37,488 INFO (StartupInfoLogger.java:50)- Starting SpringbootApplication on DESKTOP-LLVV77L with PID 14484 (C:\Users\zzh\IdeaProjects\springboot\target\classes started by zzh in C:\Users\zzh\IdeaProjects\springboot)
+2018-12-17 16:32:37,495 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.0.5.RELEASE, Spring v5.0.9.RELEASE
+2018-12-17 16:32:37,498 INFO (SpringApplication.java:680)- No active profile set, falling back to default profiles: default
+2018-12-17 16:32:46,461 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: select id, task_name, task_group, task_class, cron, description, status from job_entity where status = 1 
+2018-12-17 16:32:46,479 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 
+2018-12-17 16:32:46,492 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 1
+2018-12-17 16:32:46,506 INFO (TaskScheduler.java:39)- 定时任务调度成功： QuarzTaskDTO(id=1, taskName=测试定时任务, taskGroup=null, taskClass=com.zzh.quarz.jobs.SyncUserInfo, cron=0 0/1 * * * ? , description=测试测试, status=1)
+2018-12-17 16:32:46,506 INFO (QuarzTaskStarter.java:34)- ------------启动所有定时任务-----------
+2018-12-17 16:32:46,550 INFO (StartupInfoLogger.java:59)- Started SpringbootApplication in 10.16 seconds (JVM running for 11.578)
