@@ -15,3 +15,5 @@
                 
 7、2018-12-10 : SpringBoot 整合redis 
                 参考：https://www.jianshu.com/p/e94fe01cd032
+           
+8、2018-12-17 ：SpringBoot 整合Quarz持久化配置
