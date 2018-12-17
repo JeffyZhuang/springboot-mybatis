@@ -35,6 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date: 2018/9/29
  */
 @RestController
+@RequestMapping("/SpringBoot")
 @Slf4j
 public class UserController {
     @Autowired

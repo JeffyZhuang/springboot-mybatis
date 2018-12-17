@@ -1,0 +1,18 @@
+2018-12-17 14:23:07,268 INFO (StartupInfoLogger.java:50)- Starting SpringbootApplication on DESKTOP-LLVV77L with PID 16528 (C:\Users\zzh\IdeaProjects\springboot\target\classes started by zzh in C:\Users\zzh\IdeaProjects\springboot)
+2018-12-17 14:23:07,300 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.0.5.RELEASE, Spring v5.0.9.RELEASE
+2018-12-17 14:23:07,300 INFO (SpringApplication.java:680)- No active profile set, falling back to default profiles: default
+2018-12-17 14:24:50,570 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: select id, task_name, task_group, task_class, cron, description, status from job_entity where status = 1 
+2018-12-17 14:24:50,617 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 
+2018-12-17 14:24:50,632 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 1
+2018-12-17 14:24:50,726 INFO (TaskScheduler.java:39)- 定时任务调度成功： QuarzTaskDTO(id=1, taskName=测试定时任务, taskGroup=null, taskClass=com.zzh.quarz.jobs.SyncUserInfo, cron=0 0/1 * * * ? , description=测试测试, status=1)
+2018-12-17 14:24:50,726 INFO (QuarzTaskStarter.java:34)- ------------启动所有定时任务-----------
+2018-12-17 14:24:50,789 INFO (StartupInfoLogger.java:59)- Started SpringbootApplication in 104.708 seconds (JVM running for 107.278)
+2018-12-17 14:46:13,776 INFO (StartupInfoLogger.java:50)- Starting SpringbootApplication on DESKTOP-LLVV77L with PID 4808 (C:\Users\zzh\IdeaProjects\springboot\target\classes started by zzh in C:\Users\zzh\IdeaProjects\springboot)
+2018-12-17 14:46:13,792 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.0.5.RELEASE, Spring v5.0.9.RELEASE
+2018-12-17 14:46:13,792 INFO (SpringApplication.java:680)- No active profile set, falling back to default profiles: default
+2018-12-17 14:46:22,105 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: select id, task_name, task_group, task_class, cron, description, status from job_entity where status = 1 
+2018-12-17 14:46:22,120 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 
+2018-12-17 14:46:22,136 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 1
+2018-12-17 14:46:22,151 INFO (TaskScheduler.java:39)- 定时任务调度成功： QuarzTaskDTO(id=1, taskName=测试定时任务, taskGroup=null, taskClass=com.zzh.quarz.jobs.SyncUserInfo, cron=0 0/1 * * * ? , description=测试测试, status=1)
+2018-12-17 14:46:22,151 INFO (QuarzTaskStarter.java:34)- ------------启动所有定时任务-----------
+2018-12-17 14:46:22,198 INFO (StartupInfoLogger.java:59)- Started SpringbootApplication in 9.406 seconds (JVM running for 10.35)
