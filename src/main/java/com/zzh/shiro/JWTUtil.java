@@ -19,7 +19,7 @@ import java.util.Date;
 @Slf4j
 public class JWTUtil {
 
-    private final static long EXPIRE_TIME = 5 * 60 * 1000;
+    private final static long EXPIRE_TIME = 30 * 60 * 1000;
 
     /**
      * 校验token是否正确

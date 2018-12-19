@@ -8,6 +8,7 @@ import com.zzh.result.ApiResult;
 import com.zzh.service.UserRoleModuleService;
 import com.zzh.service.UserService;
 import com.zzh.shiro.JWTUtil;
+import com.zzh.util.SessionUtils;
 import com.zzh.vo.UserVO;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -35,7 +36,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date: 2018/9/29
  */
 @RestController
-@RequestMapping("/SpringBoot")
 @Slf4j
 public class UserController {
     @Autowired
@@ -54,8 +54,9 @@ public class UserController {
     @ApiImplicitParam(name = "id", value = "ID", required = true, dataType = "Long", paramType = "query")
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public ApiResult getUserList(@RequestParam(value = "id") int id) {
+        String userName = SessionUtils.getCurrentUserName();
+        System.out.println("userName = " + userName);
         return ApiResult.success(userService.selectByPrimaryKey(id));
-
     }
 
     /**
