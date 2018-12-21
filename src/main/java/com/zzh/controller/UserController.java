@@ -7,6 +7,7 @@ import com.zzh.po.User;
 import com.zzh.result.ApiResult;
 import com.zzh.service.UserRoleModuleService;
 import com.zzh.service.UserService;
+import com.zzh.util.MD5Utils;
 import com.zzh.util.SessionUtils;
 import com.zzh.vo.UserVO;
 import io.swagger.annotations.ApiImplicitParam;
@@ -88,7 +89,8 @@ public class UserController {
         }
         if (user.getPassword().equals(password)) {
             UserRoleModuleDTO userRoleModuleDTO = userRoleModuleService.selectRolesModulesByUid(user.getUid());
-            SecurityUtils.getSubject().login(new UsernamePasswordToken(userName, "password"));
+            SecurityUtils.getSubject().login(new UsernamePasswordToken(userName, String.valueOf(MD5Utils.md5(user
+                    .getPassword()))));
             Map<String, Object> resultMap = new HashMap<>();
             resultMap.put("Authorization", SecurityUtils.getSubject().getSession().getId());
             resultMap.put("roles", userRoleModuleDTO.getRnameSet());

@@ -49,12 +49,11 @@ public class MyShiroRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws
             AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-        log.info("当前用户登陆获取到的token:" + token.toString());
         User user = userService.selectByUserName(token.getUsername());
         if (user == null) {
             throw new AuthenticationException("User didn't existed!");
         }
 
-        return new SimpleAuthenticationInfo(token.getUsername(), "password", getName());
+        return new SimpleAuthenticationInfo(token.getUsername(), token.getPassword(), getName());
     }
 }
