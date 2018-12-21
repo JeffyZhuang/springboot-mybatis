@@ -16,15 +16,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from job_entity
+    from quarz_task
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from job_entity
+    delete from quarz_task
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.zzh.quarz.dto.QuarzTaskDTO" >
-    insert into job_entity (id, task_name, task_group, 
+    insert into quarz_task (id, task_name, task_group, 
       task_class, cron, description,
       status)
     values (#{id,jdbcType=INTEGER}, #{taskName,jdbcType=VARCHAR}, #{taskGroup,jdbcType=VARCHAR}, 
@@ -32,7 +32,7 @@
       #{status,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.zzh.quarz.dto.QuarzTaskDTO" >
-    insert into job_entity
+    insert into quarz_task
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -81,7 +81,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.zzh.quarz.dto.QuarzTaskDTO" >
-    update job_entity
+    update quarz_task
     <set >
       <if test="taskName != null" >
         task_name = #{taskName,jdbcType=VARCHAR},
@@ -105,7 +105,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zzh.quarz.dto.QuarzTaskDTO" >
-    update job_entity
+    update quarz_task
     set task_name = #{taskName,jdbcType=VARCHAR},
       task_group = #{taskGroup,jdbcType=VARCHAR},
       task_class = #{taskClass,jdbcType=VARCHAR},
@@ -117,7 +117,7 @@
   <select id="selectAllValidTask" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
-    from job_entity
+    from quarz_task
     where status = 1
   </select>
 </mapper>

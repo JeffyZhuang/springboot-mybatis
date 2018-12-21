@@ -88,8 +88,8 @@ INSERT INTO `test`.`user_role`(`id`, `uid`, `rid`) VALUES (3, 1, 2);
 -- ---------------
 -- Quarz
 -- ---------------
-DROP TABLE IF EXISTS `job_entity`;
-CREATE TABLE `job_entity`  (
+DROP TABLE IF EXISTS `quarz_task`;
+CREATE TABLE `quarz_task`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `task_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `task_group` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
@@ -101,6 +101,6 @@ CREATE TABLE `job_entity`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
--- Records of job_entity
+-- Records of quarz_task
 -- ----------------------------
-INSERT INTO `job_entity` VALUES (1, '测试定时任务', NULL, 'com.zzh.quarz.jobs.SyncUserInfo', '0 0/1 * * * ? ', '测试测试', 1);
+INSERT INTO `quarz_task` VALUES (1, '测试定时任务', NULL, 'com.zzh.quarz.jobs.SyncUserInfo', '0 0/1 * * * ? ', '测试测试', 1);
