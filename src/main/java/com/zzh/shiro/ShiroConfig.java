@@ -41,7 +41,7 @@ public class ShiroConfig {
     }
 
     @Bean("securityManager")
-    public DefaultWebSecurityManager getManager(SessionManager sessionManager, MyRealm realm) {
+    public DefaultWebSecurityManager getManager(SessionManager sessionManager, MyShiroRealm realm) {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
         manager.setRealm(realm);
         manager.setSessionManager(sessionManager);
