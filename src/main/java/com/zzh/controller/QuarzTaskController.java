@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date: 2018/12/11
  */
 @RestController
-@RequestMapping("/ScheduleTask")
+@RequestMapping(value = "/zzh/quarz")
 @Slf4j
 public class QuarzTaskController {
 

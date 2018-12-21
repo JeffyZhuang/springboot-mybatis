@@ -7,17 +7,13 @@ import com.zzh.po.User;
 import com.zzh.result.ApiResult;
 import com.zzh.service.UserRoleModuleService;
 import com.zzh.service.UserService;
-import com.zzh.shiro.JWTUtil;
 import com.zzh.util.SessionUtils;
 import com.zzh.vo.UserVO;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authz.annotation.Logical;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +25,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * @Author: zzh
@@ -36,6 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date: 2018/9/29
  */
 @RestController
+@RequestMapping("/zzh/user")
 @Slf4j
 public class UserController {
     @Autowired
@@ -78,7 +78,7 @@ public class UserController {
      * @param userVO
      * @return
      */
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping("/login")
     public ApiResult getUserList(@RequestBody UserVO userVO) {
         String userName = userVO.getUserName();
         String password = userVO.getPassword();
@@ -87,8 +87,12 @@ public class UserController {
             return new ApiResult(ErrorCode.USER_NO_EXIT, null);
         }
         if (user.getPassword().equals(password)) {
-            String sign = JWTUtil.sign(userName, password);
-            return new ApiResult(ErrorCode.SUCCESS.getCode(), "Login SUCCESS", sign);
+            UserRoleModuleDTO userRoleModuleDTO = userRoleModuleService.selectRolesModulesByUid(user.getUid());
+            SecurityUtils.getSubject().login(new UsernamePasswordToken(userName, "password"));
+            Map<String, Object> resultMap = new HashMap<>();
+            resultMap.put("Authorization", SecurityUtils.getSubject().getSession().getId());
+            resultMap.put("roles", userRoleModuleDTO.getRnameSet());
+            return ApiResult.success(resultMap);
         } else {
             //把异常抛到自定义的异常类
             throw new UnauthorizedException();
@@ -106,19 +110,16 @@ public class UserController {
     }
 
     @GetMapping("/require_auth")
-    @RequiresAuthentication
     public ApiResult requireAuth() {
         return new ApiResult(200, "You are authenticated", null);
     }
 
     @GetMapping("/require_role")
-    @RequiresRoles("admin")
     public ApiResult requireRole() {
         return new ApiResult(200, "You are visiting require_role", null);
     }
 
     @GetMapping("/require_permission")
-    @RequiresPermissions(logical = Logical.AND, value = {"add", "delete"})
     public ApiResult requirePermission() {
         return new ApiResult(200, "You are visiting permission require add,delete", null);
     }

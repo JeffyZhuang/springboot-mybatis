@@ -16,6 +16,7 @@ import java.util.List;
  * @Date: 2018/10/18
  */
 @RestController
+@RequestMapping(value = "/zzh/export")
 public class ExcelController {
     @RequestMapping(value = "/excel", method = RequestMethod.GET)
     public void excel(HttpServletResponse response) throws Exception {
@@ -42,6 +43,6 @@ public class ExcelController {
         FileOutputStream out = new FileOutputStream(f);
         ExportExcelUtils.exportExcel(data, out);
         out.close();*/
-        ExportExcelUtils.exportExcel(response,"hello.xlsx",data);
+        ExportExcelUtils.exportExcel(response, "hello.xlsx", data);
     }
 }

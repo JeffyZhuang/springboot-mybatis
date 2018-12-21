@@ -1,12 +1,12 @@
-package com.zzh.controller;
+package com.zzh.handler;
 
 import com.zzh.exception.UnauthorizedException;
 import com.zzh.result.ApiResult;
 import org.apache.shiro.ShiroException;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletRequest;
  * @Description: 定义全局处理异常入口
  * @Date: 2018/12/8
  */
-@RestControllerAdvice
-public class ExceptionController {
+@ControllerAdvice
+public class GlobalExceptionHandler {
 
     //捕捉Shiro的异常
     @ResponseStatus(HttpStatus.UNAUTHORIZED)

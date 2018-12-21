@@ -13,7 +13,9 @@ public enum ErrorCode {
     SUCCESS(0, "成功"),
     FAIL(-1, "失败"),
     USER_NO_EXIT(9001, "用户不存在"),
-    SCHEDULER_ERROR(9002,"定时任务调度失败 ")
+    USER_UNAUTH(9002, "未登陆用户"),
+    USER_UNAUTHORIZATION(9003, "没有权限"),
+    SCHEDULER_ERROR(9004,"定时任务调度失败 ")
     ;
 
 

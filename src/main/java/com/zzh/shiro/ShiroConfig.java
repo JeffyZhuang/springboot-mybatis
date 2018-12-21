@@ -1,7 +1,7 @@
 package com.zzh.shiro;
 
-import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
-import org.apache.shiro.mgt.DefaultSubjectDAO;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -20,51 +20,55 @@ import java.util.Map;
  * @Description:Shiro配置文件
  * @Date: 2018/12/8
  */
+@Slf4j
 @Configuration
 public class ShiroConfig {
+
+    public static final Map<String, String> FILTERRULEMAP = new HashMap<>();
+
+    static {
+        FILTERRULEMAP.put("/zzh/user/login", "anon");
+        FILTERRULEMAP.put("/zzh/user/logout", "anon");
+        FILTERRULEMAP.put("/401", "anon");
+        FILTERRULEMAP.put("/404", "anon");
+        FILTERRULEMAP.put("/**", "roles[admin]");
+        FILTERRULEMAP.put("/zzh/**", "authc");
+    }
+
+    @Bean(name = "myShiroRealm")
+    public MyShiroRealm myShiroRealm() {
+        return new MyShiroRealm();
+    }
+
     @Bean("securityManager")
-    public DefaultWebSecurityManager getManager(MyRealm realm) {
+    public DefaultWebSecurityManager getManager(SessionManager sessionManager, MyRealm realm) {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
-        // 使用自己的realm
         manager.setRealm(realm);
-
-        /*
-         * 关闭shiro自带的session，详情见文档
-         * http://shiro.apache.org/session-management.html#SessionManagement-StatelessApplications%28Sessionless%29
-         */
-        DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
-        DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = new DefaultSessionStorageEvaluator();
-        defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
-        subjectDAO.setSessionStorageEvaluator(defaultSessionStorageEvaluator);
-        manager.setSubjectDAO(subjectDAO);
-
+        manager.setSessionManager(sessionManager);
         return manager;
     }
+
+    @Bean
+    public SessionManager sessionManager() {
+        MySessionManage mySessionManage = new MySessionManage();
+        mySessionManage.setGlobalSessionTimeout(30 * 60 * 1000);
+        return mySessionManage;
+    }
+
 
     @Bean("shiroFilter")
     public ShiroFilterFactoryBean factory(DefaultWebSecurityManager securityManager) {
         ShiroFilterFactoryBean factoryBean = new ShiroFilterFactoryBean();
-
-        // 添加自己的过滤器并且取名为jwt
         Map<String, Filter> filterMap = new HashMap<>();
-        filterMap.put("jwt", new JWTFilter());
+        factoryBean.setFilterChainDefinitionMap(FILTERRULEMAP);
+        filterMap.put("roles", new MyAuthorizationFilter());
         factoryBean.setFilters(filterMap);
-
         factoryBean.setSecurityManager(securityManager);
         factoryBean.setUnauthorizedUrl("/401");
 
-        /*
-         * 自定义url规则
-         * http://shiro.apache.org/web.html#urls-
-         */
-        Map<String, String> filterRuleMap = new HashMap<>();
-        // 所有请求通过我们自己的JWT Filter
-        filterRuleMap.put("/**", "jwt");
-        // 访问401和404页面不通过我们的Filter
-        filterRuleMap.put("/401", "anon");
-        factoryBean.setFilterChainDefinitionMap(filterRuleMap);
         return factoryBean;
     }
+
 
     /**
      * 下面的代码是添加注解支持
@@ -73,8 +77,6 @@ public class ShiroConfig {
     @DependsOn("lifecycleBeanPostProcessor")
     public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
         DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
-        // 强制使用cglib，防止重复代理和可能引起代理出错的问题
-        // https://zhuanlan.zhihu.com/p/29161098
         defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);
         return defaultAdvisorAutoProxyCreator;
     }

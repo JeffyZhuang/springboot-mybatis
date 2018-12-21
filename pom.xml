@@ -42,10 +42,6 @@
             <version>1.3.2</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.mybatis.generator</groupId>
             <artifactId>mybatis-generator-core</artifactId>
             <version>1.3.5</version>
@@ -169,6 +165,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>

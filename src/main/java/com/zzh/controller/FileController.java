@@ -20,6 +20,7 @@ import java.io.UnsupportedEncodingException;
  * @Date: 2018/12/17
  */
 @RestController
+@RequestMapping(value = "/zzh/file")
 @Slf4j
 public class FileController {
 
