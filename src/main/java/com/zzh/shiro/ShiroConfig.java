@@ -1,5 +1,7 @@
 package com.zzh.shiro;
 
+import com.zzh.service.UserService;
+import com.zzh.service.impl.UserServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -26,13 +28,18 @@ public class ShiroConfig {
 
     public static final Map<String, String> FILTERRULEMAP = new HashMap<>();
 
+    //设置默认的过滤接口，一般不可修改，放在DB的接口限制之后
     static {
         FILTERRULEMAP.put("/zzh/user/login", "anon");
         FILTERRULEMAP.put("/zzh/user/logout", "anon");
         FILTERRULEMAP.put("/401", "anon");
         FILTERRULEMAP.put("/404", "anon");
         FILTERRULEMAP.put("/**", "roles[admin]");
-        FILTERRULEMAP.put("/zzh/**", "authc");
+    }
+
+    @Bean
+    public UserService userService() {
+        return new UserServiceImpl();
     }
 
     @Bean(name = "myShiroRealm")
@@ -59,14 +66,23 @@ public class ShiroConfig {
     @Bean("shiroFilter")
     public ShiroFilterFactoryBean factory(DefaultWebSecurityManager securityManager) {
         ShiroFilterFactoryBean factoryBean = new ShiroFilterFactoryBean();
+        loadDefaultAndDbFilterChain(factoryBean);
         Map<String, Filter> filterMap = new HashMap<>();
-        factoryBean.setFilterChainDefinitionMap(FILTERRULEMAP);
         filterMap.put("roles", new MyAuthorizationFilter());
         factoryBean.setFilters(filterMap);
         factoryBean.setSecurityManager(securityManager);
         factoryBean.setUnauthorizedUrl("/401");
 
         return factoryBean;
+    }
+
+    private void loadDefaultAndDbFilterChain(ShiroFilterFactoryBean factoryBean) {
+        //先将用户角色数据库中对应的权限加入到过滤器中
+        Map<String, String> filterChainMap = new HashMap<>();
+        Map<String, String> dbFilterPremission = userService().getRules();
+        filterChainMap.putAll(dbFilterPremission);
+        filterChainMap.putAll(FILTERRULEMAP);
+        factoryBean.setFilterChainDefinitionMap(filterChainMap);
     }
 
 

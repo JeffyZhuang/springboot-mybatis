@@ -40,8 +40,10 @@ public class MyShiroRealm extends AuthorizingRealm {
         UserRoleModuleDTO userRoleModuleDTO = userRoleModuleService.selectRolesModulesByUid(user.getUid());
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         HashSet hashSet = new HashSet();
-        hashSet.add(userRoleModuleDTO.getRnameSet());
-        simpleAuthorizationInfo.addRoles(hashSet);
+        for (String role : userRoleModuleDTO.getRnameSet()) {
+            hashSet.add(role);
+        }
+        simpleAuthorizationInfo.setRoles(hashSet);
         return simpleAuthorizationInfo;
     }
 

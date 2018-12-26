@@ -9,5 +9,7 @@ public class RedisKeyPrefix {
     private RedisKeyPrefix() {
     }
 
-    public static final String USER = "user:";
+    public static final String USER = "USER:";
+
+    public static final String SHIRO_RULES = "SHIRO_RULES:";
 }

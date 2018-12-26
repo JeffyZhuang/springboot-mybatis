@@ -2,6 +2,8 @@ package com.zzh.service;
 
 import com.zzh.po.User;
 
+import java.util.Map;
+
 /**
  * @Author: zzh
  * @Description:
@@ -19,4 +21,6 @@ public interface UserService {
      * @return
      */
     User selectByUserName(String userName);
+
+    Map<String, String> getRules();
 }

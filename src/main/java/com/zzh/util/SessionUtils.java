@@ -1,6 +1,5 @@
 package com.zzh.util;
 
-import com.zzh.shiro.JWTUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 
@@ -17,7 +16,7 @@ public class SessionUtils {
      * @return
      */
     public static String getCurrentUserName() {
-        return JWTUtil.getUserName((String) SecurityUtils.getSubject().getPrincipal());
+        return String.valueOf(SecurityUtils.getSubject().getPrincipal());
     }
 
     /**

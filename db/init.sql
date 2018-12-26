@@ -104,3 +104,25 @@ CREATE TABLE `quarz_task`  (
 -- Records of quarz_task
 -- ----------------------------
 INSERT INTO `quarz_task` VALUES (1, '测试定时任务', NULL, 'com.zzh.quarz.jobs.SyncUserInfo', '0 0/1 * * * ? ', '测试测试', 1);
+
+
+DROP TABLE IF EXISTS `premission`;
+CREATE TABLE `premission`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '接口名',
+	`url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '接口url',
+  `status` int(11) NULL DEFAULT NULL COMMENT '状态',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+
+DROP TABLE IF EXISTS `role_premission`;
+CREATE TABLE `role_premission`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '角色id',
+	`premission_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '接口权限id',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+INSERT INTO `test`.`premission`(`id`, `name`, `url`, `status`) VALUES (1, '测试链接', '/zzh/user/article', 1);
+INSERT INTO `test`.`premission`(`id`, `name`, `url`, `status`) VALUES (2, 'asdasd', '/zzh/user/user', 1);
