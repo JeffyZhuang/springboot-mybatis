@@ -17,3 +17,5 @@
                 参考：https://www.jianshu.com/p/e94fe01cd032
            
 8、2018-12-17 ：SpringBoot 整合Quarz持久化配置
+
+9、2018-12-26 : 修改shiro权限认证，增加过滤器，整合redis到权限认证
