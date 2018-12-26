@@ -14,6 +14,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +25,7 @@ import java.util.Map;
  * @Date: 2018/12/26
  */
 @RequestMapping("/zzh")
+@RestController
 public class LoginController {
 
     @Autowired
@@ -38,7 +40,7 @@ public class LoginController {
      * @param userVO
      * @return
      */
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login")
     public ApiResult getUserList(@RequestBody UserVO userVO) {
         String userName = userVO.getUserName();
         String password = userVO.getPassword();
