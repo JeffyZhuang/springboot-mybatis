@@ -114,6 +114,11 @@ CREATE TABLE `premission`  (
   `status` int(11) NULL DEFAULT NULL COMMENT '状态',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+INSERT INTO `test`.`premission`(`id`, `name`, `url`, `status`) VALUES (1, '导出excel接口', '/zzh/export/excel', 1);
+INSERT INTO `test`.`premission`(`id`, `name`, `url`, `status`) VALUES (2, '文件下载接口', '/zzh/file/download', 1);
+INSERT INTO `test`.`premission`(`id`, `name`, `url`, `status`) VALUES (3, '定时任务相关接口', '/zzh/quarz/**', 1);
+INSERT INTO `test`.`premission`(`id`, `name`, `url`, `status`) VALUES (4, '根据id获取用户信息', '/zzh/user/user', 1);
+INSERT INTO `test`.`premission`(`id`, `name`, `url`, `status`) VALUES (5, '根据用户id获取用户的角色资源', '/zzh/user/userRoleModule', 1);
 
 
 DROP TABLE IF EXISTS `role_premission`;
@@ -124,5 +129,10 @@ CREATE TABLE `role_premission`  (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
-INSERT INTO `test`.`premission`(`id`, `name`, `url`, `status`) VALUES (1, '测试链接', '/zzh/user/article', 1);
-INSERT INTO `test`.`premission`(`id`, `name`, `url`, `status`) VALUES (2, 'asdasd', '/zzh/user/user', 1);
+INSERT INTO `test`.`role_premission`(`id`, `role_id`, `premission_id`) VALUES (1, '1', '1');
+INSERT INTO `test`.`role_premission`(`id`, `role_id`, `premission_id`) VALUES (2, '1', '2');
+INSERT INTO `test`.`role_premission`(`id`, `role_id`, `premission_id`) VALUES (3, '1', '3');
+INSERT INTO `test`.`role_premission`(`id`, `role_id`, `premission_id`) VALUES (4, '1', '4');
+INSERT INTO `test`.`role_premission`(`id`, `role_id`, `premission_id`) VALUES (5, '2', '4');
+INSERT INTO `test`.`role_premission`(`id`, `role_id`, `premission_id`) VALUES (6, '1', '5');
+INSERT INTO `test`.`role_premission`(`id`, `role_id`, `premission_id`) VALUES (7, '2', '5');
