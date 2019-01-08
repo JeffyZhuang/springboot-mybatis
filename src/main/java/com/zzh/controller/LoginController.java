@@ -2,7 +2,6 @@ package com.zzh.controller;
 
 import com.zzh.ErrorCode;
 import com.zzh.dto.UserRoleModuleDTO;
-import com.zzh.exception.UnauthorizedException;
 import com.zzh.po.User;
 import com.zzh.result.ApiResult;
 import com.zzh.service.UserRoleModuleService;
@@ -58,7 +57,8 @@ public class LoginController {
             return ApiResult.success(resultMap);
         } else {
             //把异常抛到自定义的异常类
-            throw new UnauthorizedException();
+            return ApiResult.fail(ErrorCode.USER_VALID_ERROR.getMsg());
+            //throw new UnauthorizedException();
         }
     }
 

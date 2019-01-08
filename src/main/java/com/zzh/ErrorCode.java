@@ -15,7 +15,8 @@ public enum ErrorCode {
     USER_NO_EXIT(9001, "用户不存在"),
     USER_UNAUTH(9002, "未登陆用户"),
     USER_UNAUTHORIZATION(9003, "没有权限"),
-    SCHEDULER_ERROR(9004,"定时任务调度失败 ")
+    SCHEDULER_ERROR(9004,"定时任务调度失败 "),
+    USER_VALID_ERROR(9005, "用户账号密码错误"),
     ;
 
 
