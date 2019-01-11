@@ -1,7 +1,6 @@
 package com.zzh.quarz.jobs;
 
 import com.zzh.service.UserService;
-import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @Description:
  * @Date: 2018/12/12
  */
-public class SyncUserInfo implements Job {
+public class SyncUserInfo extends AbstractJob {
 
     @Autowired
     private UserService userService;

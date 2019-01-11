@@ -12,4 +12,6 @@ public class RedisKeyPrefix {
     public static final String USER = "USER:";
 
     public static final String SHIRO_RULES = "SHIRO_RULES:";
+
+    public static final String QUARZ_TASK_PRE = "QUARZ_TASK:";
 }
