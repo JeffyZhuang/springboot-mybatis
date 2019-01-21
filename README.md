@@ -19,3 +19,5 @@
 8、2018-12-17 ：SpringBoot 整合Quarz持久化配置
 
 9、2018-12-26 : 修改shiro权限认证，增加过滤器，整合redis到权限认证
+
+10、2019-01-21 ： SpringBoot 整合ActiveMQ JMS
