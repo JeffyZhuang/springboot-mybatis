@@ -20,4 +20,8 @@ public class User implements Serializable {
     private String username;
     @ApiModelProperty(value = "用户的密码")
     private String password;
+    @ApiModelProperty(value = "用户的邮箱")
+    private String mail;
+    @ApiModelProperty(value = "用户的状态 0未激活 1激活")
+    private String activeStatus;
 }

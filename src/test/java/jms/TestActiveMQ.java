@@ -1,4 +1,4 @@
-package jmsTest;
+package jms;
 
 import com.zzh.SpringbootApplication;
 import com.zzh.jms.service.MessageProducerService;
