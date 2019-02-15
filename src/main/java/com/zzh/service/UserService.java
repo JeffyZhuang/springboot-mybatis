@@ -1,6 +1,7 @@
 package com.zzh.service;
 
 import com.zzh.po.User;
+import com.zzh.vo.RegisterUserVO;
 
 import java.util.Map;
 
@@ -23,4 +24,16 @@ public interface UserService {
     User selectByUserName(String userName);
 
     Map<String, String> getRules();
+
+    /**
+     * 注册用户
+     * @param registerUserVO
+     */
+    int registerUser(RegisterUserVO registerUserVO);
+
+    /**
+     * 激活用户
+     * @param activeCode
+     */
+    int updateUserStatus(String activeCode);
 }

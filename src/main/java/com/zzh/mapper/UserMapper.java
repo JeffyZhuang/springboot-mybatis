@@ -1,6 +1,7 @@
 package com.zzh.mapper;
 
 import com.zzh.po.User;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @author zzh
@@ -20,4 +21,6 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     User selectByUserName(String userName);
+
+    int updateUserStatus(@Param("activeCode") String activeCode);
 }

@@ -17,6 +17,8 @@ public enum ErrorCode {
     USER_UNAUTHORIZATION(9003, "没有权限"),
     SCHEDULER_ERROR(9004,"定时任务调度失败 "),
     USER_VALID_ERROR(9005, "用户账号密码错误"),
+    USER_EXIT(9006, "用户已存在"),
+    USER_NO_ACTIVE(9007, "用户未激活"),
     ;
 
 

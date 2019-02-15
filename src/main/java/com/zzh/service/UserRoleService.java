@@ -16,4 +16,12 @@ public interface UserRoleService {
      * @return
      */
     UserRoleModuleDTO selectRolesByUid(int uid);
+
+    /**
+     * 插入新注册用户的普通角色
+     *
+     * @param uid
+     * @return
+     */
+    int insertUserRole(Integer uid);
 }

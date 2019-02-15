@@ -7,6 +7,7 @@ import com.zzh.mapper.UserMapper;
 import com.zzh.po.User;
 import com.zzh.redis.RedisHandle;
 import com.zzh.service.UserService;
+import com.zzh.vo.RegisterUserVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -74,7 +75,22 @@ public class UserServiceImpl implements UserService {
             }
         }
         log.info("rules数据为：" + rulesMap.toString());
-        redisHandle.setMap(RedisKeyPrefix.SHIRO_RULES,rulesMap);
+        redisHandle.setMap(RedisKeyPrefix.SHIRO_RULES, rulesMap);
         return rulesMap;
+    }
+
+    @Override
+    public int registerUser(RegisterUserVO registerUserVO) {
+        User user = new User();
+        user.setUsername(registerUserVO.getUserName());
+        user.setPassword(registerUserVO.getPassword());
+        user.setMail(registerUserVO.getEmail());
+        user.setActiveCode(registerUserVO.getActiveCode());
+        return userMapper.insertSelective(user);
+    }
+
+    @Override
+    public int updateUserStatus(String activeCode) {
+        return userMapper.updateUserStatus(activeCode);
     }
 }

@@ -1,6 +1,7 @@
 package com.zzh.service;
 
 import com.zzh.dto.UserRoleModuleDTO;
+import com.zzh.vo.RegisterUserVO;
 
 /**
  * @Author: zzh
@@ -16,4 +17,12 @@ public interface UserRoleModuleService {
      * @return
      */
     UserRoleModuleDTO selectRolesModulesByUid(int uid);
+
+    /**
+     * 插入用户的普通角色
+     *
+     * @param registerUserVO
+     * @return
+     */
+    int addUserNormalRole(RegisterUserVO registerUserVO);
 }

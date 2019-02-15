@@ -1,12 +1,17 @@
 package com.zzh.controller;
 
 import com.zzh.ErrorCode;
+import com.zzh.config.ServerConfig;
+import com.zzh.constant.Constant;
+import com.zzh.dto.Mail;
 import com.zzh.dto.UserRoleModuleDTO;
 import com.zzh.po.User;
 import com.zzh.result.ApiResult;
+import com.zzh.service.MailService;
 import com.zzh.service.UserRoleModuleService;
 import com.zzh.service.UserService;
 import com.zzh.util.MD5Utils;
+import com.zzh.vo.RegisterUserVO;
 import com.zzh.vo.UserVO;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -17,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @Author: zzh
@@ -33,6 +39,12 @@ public class LoginController {
     @Autowired
     private UserRoleModuleService userRoleModuleService;
 
+    @Autowired
+    private MailService mailService;
+
+    @Autowired
+    private ServerConfig serverConfig;
+
     /**
      * 登陆接口
      *
@@ -40,12 +52,17 @@ public class LoginController {
      * @return
      */
     @RequestMapping(value = "/login")
-    public ApiResult getUserList(@RequestBody UserVO userVO) {
+    public ApiResult login(@RequestBody UserVO userVO) {
         String userName = userVO.getUserName();
         String password = userVO.getPassword();
         User user = userService.selectByUserName(userName);
         if (user == null) {
-            return new ApiResult(ErrorCode.USER_NO_EXIT, null);
+            return ApiResult.fail(ErrorCode.USER_NO_EXIT.getMsg());
+        } else {
+            //是否激活
+            if (user.getActiveStatus().equals(Constant.USER_ACTIVE_STATUS_0)) {
+                return ApiResult.fail(ErrorCode.USER_NO_ACTIVE.getMsg());
+            }
         }
         if (user.getPassword().equals(password)) {
             UserRoleModuleDTO userRoleModuleDTO = userRoleModuleService.selectRolesModulesByUid(user.getUid());
@@ -62,4 +79,51 @@ public class LoginController {
         }
     }
 
+
+    /**
+     * 注册接口
+     *
+     * @param registerUserVO
+     * @return
+     */
+    @RequestMapping(value = "/register")
+    public ApiResult register(@RequestBody RegisterUserVO registerUserVO) {
+        String userName = registerUserVO.getUserName();
+        int num = 0;
+        User user = userService.selectByUserName(userName);
+        if (user != null) {
+            return new ApiResult(ErrorCode.USER_EXIT, "用户已存在");
+        } else {
+            //执行注册用户
+            registerUserVO.setActiveCode(String.valueOf(UUID.randomUUID()));
+            num = userService.registerUser(registerUserVO);
+        }
+        if (num > 0) {
+            int roleNum = userRoleModuleService.addUserNormalRole(registerUserVO);
+            if (roleNum > 0) {
+                //发送激活邮件
+                Mail mail = new Mail();
+                mail.setEmail(registerUserVO.getEmail());
+                mail.setSubject(Constant.ACTIVE_MAIL_SUBJECT);
+                mail.setContent(Constant.ACTIVE_MAIL_CONTEXT + serverConfig.getUrl() + "/zzh/active?activeCode=" +
+                        registerUserVO.getActiveCode());
+                mailService.send(mail);
+            }
+            return ApiResult.success("注册成功");
+        } else {
+            return ApiResult.fail("注册失败");
+        }
+    }
+
+    /**
+     * 注册接口
+     *
+     * @param activeCode
+     * @return
+     */
+    @RequestMapping(value = "/active")
+    public ApiResult active(String activeCode) {
+        int num = userService.updateUserStatus(activeCode);
+            return  ApiResult.success("激活成功");
+    }
 }

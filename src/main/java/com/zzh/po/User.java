@@ -24,4 +24,6 @@ public class User implements Serializable {
     private String mail;
     @ApiModelProperty(value = "用户的状态 0未激活 1激活")
     private String activeStatus;
+    @ApiModelProperty(value = "用户的激活码")
+    private String activeCode;
 }

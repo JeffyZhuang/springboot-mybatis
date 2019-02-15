@@ -1,8 +1,10 @@
 package com.zzh.service.impl;
 
+import com.zzh.constant.Constant;
 import com.zzh.dto.UserRoleDTO;
 import com.zzh.dto.UserRoleModuleDTO;
 import com.zzh.mapper.UserRoleMapper;
+import com.zzh.po.UserRole;
 import com.zzh.service.UserRoleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +42,13 @@ public class UserRoleServiceImpl implements UserRoleService {
         userRoleModuleDTO.setRnameSet(roleSet);
         userRoleModuleDTO.setRidSet(roleIdSet);
         return userRoleModuleDTO;
+    }
+
+    @Override
+    public int insertUserRole(Integer uid) {
+        UserRole userRole = new UserRole();
+        userRole.setRid(Constant.ID_ROLE_CUSTOMER);
+        userRole.setUid(uid);
+        return userRoleMapper.insertSelective(userRole);
     }
 }

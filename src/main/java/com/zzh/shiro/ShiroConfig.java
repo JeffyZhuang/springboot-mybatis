@@ -31,6 +31,8 @@ public class ShiroConfig {
     //设置默认的过滤接口，一般不可修改，放在DB的接口限制之后
     static {
         FILTERRULEMAP.put("/zzh/login", "anon");
+        FILTERRULEMAP.put("/zzh/register", "anon");
+        FILTERRULEMAP.put("/zzh/active", "anon");
         FILTERRULEMAP.put("/zzh/user/logout", "anon");
         FILTERRULEMAP.put("/401", "anon");
         FILTERRULEMAP.put("/404", "anon");

@@ -7,9 +7,10 @@
         <result column="password" property="password" jdbcType="VARCHAR"/>
         <result column="mail" property="mail" jdbcType="VARCHAR"/>
         <result column="active_status" property="activeStatus" jdbcType="VARCHAR"/>
+        <result column="active_code" property="activeCode" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-    uid, username, password,mail,actice_status
+    uid, username, password,mail,actice_status,active_code
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -22,9 +23,9 @@
     where uid = #{uid,jdbcType=INTEGER}
   </delete>
     <insert id="insert" parameterType="com.zzh.po.User">
-    insert into user (uid, username, password,mail,active_status)
+    insert into user (uid, username, password,mail,active_status,active_code)
     values (#{uid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
-    #{mail,jdbcType=VARCHAR}, #{activeStatus,jdbcType=VARCHAR})
+    #{mail,jdbcType=VARCHAR}, #{activeStatus,jdbcType=VARCHAR}, #{activeCode,jdbcType=VARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.zzh.po.User">
         insert into user
@@ -44,6 +45,9 @@
             <if test="activeStatus != null">
                 active_status
             </if>
+            <if test="activeCode != null">
+                active_code
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="uid != null">
@@ -60,6 +64,9 @@
             </if>
             <if test="activeStatus != null">
                 #{activeStatus,jdbcType=VARCHAR}
+            </if>
+            <if test="activeCode != null">
+                #{activeCode,jdbcType=VARCHAR}
             </if>
         </trim>
     </insert>
@@ -78,6 +85,9 @@
             <if test="activeStatus != null">
                 active_status = #{activeStatus,jdbcType=VARCHAR},
             </if>
+            <if test="activeCode != null">
+                active_code = #{activeCode,jdbcType=VARCHAR},
+            </if>
         </set>
         where uid = #{uid,jdbcType=INTEGER}
     </update>
@@ -86,7 +96,8 @@
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       mail = #{mail,jdbcType=VARCHAR},
-      active_status = #{activeStatus,jdbcType=VARCHAR}
+      active_status = #{activeStatus,jdbcType=VARCHAR},
+      active_code = #{activeCode,jdbcType=VARCHAR}
     where uid = #{uid,jdbcType=INTEGER}
   </update>
     <select id="getUserList" resultMap="BaseResultMap">
@@ -99,4 +110,11 @@
     from user u
     where u.username = #{username}
   </select>
+    <update id="updateUserStatus" parameterType="com.zzh.po.User">
+        update user
+        set
+        active_status = '1'
+        where active_code = #{activeCode,jdbcType=INTEGER}
+    </update>
+
 </mapper>
