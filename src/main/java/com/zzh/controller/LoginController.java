@@ -59,7 +59,7 @@ public class LoginController {
         if (user == null) {
             return ApiResult.fail(ErrorCode.USER_NO_EXIT.getMsg());
         } else {
-            //是否激活
+            //判断是否激活
             if (user.getActiveStatus().equals(Constant.USER_ACTIVE_STATUS_0)) {
                 return ApiResult.fail(ErrorCode.USER_NO_ACTIVE.getMsg());
             }
@@ -75,7 +75,6 @@ public class LoginController {
         } else {
             //把异常抛到自定义的异常类
             return ApiResult.fail(ErrorCode.USER_VALID_ERROR.getMsg());
-            //throw new UnauthorizedException();
         }
     }
 
@@ -124,6 +123,6 @@ public class LoginController {
     @RequestMapping(value = "/active")
     public ApiResult active(String activeCode) {
         int num = userService.updateUserStatus(activeCode);
-            return  ApiResult.success("激活成功");
+        return ApiResult.success("激活成功");
     }
 }
